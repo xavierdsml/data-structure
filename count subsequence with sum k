@@ -1,0 +1,35 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int subsequenceSum(int ind, int s, int sum, int arr[], int n){
+    //base condition
+    if(ind == n){
+        //condition satisfied
+        if(s == sum) return 1;
+        //condition is not satisfied
+        else return 0;
+    }
+    //take
+    s+=arr[ind];
+    
+    int left = subsequenceSum(ind+1, s, sum, arr, n);
+    
+    s-=arr[ind];
+    
+    //not take
+    int right = subsequenceSum(ind+1, s, sum, arr, n);
+    
+    return left + right;
+}
+ 
+int main(){
+    int arr[] = {1, 2, 1};
+    int n = 3;
+    int sum = 2;
+    
+    //subsequenceSum(index, data-structure, inital-sum, sum-required, array, size)
+    //The first 3 are the recursion parameter and then support for slg question
+    //subsequenceSum(0, 0, sum, arr, n);
+    cout<<subsequenceSum(0,0,sum,arr,n);
+}
