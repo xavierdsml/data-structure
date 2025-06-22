@@ -1,0 +1,24 @@
+class Solution {
+private:
+    void subsets(int ind, vector<int>&arr, vector<int>&ds, vector<vector<int>>&ans){
+        //base condition
+        ans.push_back(ds);
+
+        //do for all index
+        for(int i = ind; i<arr.size(); i++){
+            if(i > ind && arr[i] == arr[i-1]) continue; //duplicates removed
+            ds.push_back(arr[i]);
+            subsets(i+1, arr, ds, ans);
+            ds.pop_back();
+        } 
+    }
+
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<int>ds;
+        vector<vector<int>>ans;
+        subsets(0, nums, ds, ans);
+        return ans;
+    }
+};
