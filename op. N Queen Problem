@@ -1,0 +1,41 @@
+//hashing technique is used for optimise the space so ek he loop mai check no other function is make  for checking the Queen present or not.
+
+//hash mai 1, 0 dalege
+
+class Solution {
+public:
+    void solve(int col, vector<string>&board, vector<vector<string>>&ans, vector<int>&upperDiagonal, vector<int>&sideRow, vector<int>&lowerDiagonal, int n){
+
+        //base condition
+        if(col == n){
+            ans.push_back(board);
+            return;
+        }
+
+        for(int row = 0; row<n; row++){
+            if(upperDiagonal[n-1+col-row] == 0 && sideRow[row] == 0 && lowerDiagonal[row+col] == 0){
+                upperDiagonal[n-1+col-row] = 1;
+                sideRow[row] = 1;
+                lowerDiagonal[row+col] = 1;
+                board[row][col] = 'Q';
+                solve(col+1, board, ans, upperDiagonal, sideRow, lowerDiagonal, n);
+                board[row][col] = '.';
+                upperDiagonal[n-1+col-row] = 0;
+                sideRow[row] = 0;
+                lowerDiagonal[row+col] = 0;
+            }
+        }
+    }
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>>ans;
+        vector<string>board(n);
+        string s(n, '.');
+        for(int i=0; i<n; i++){
+            board[i] = s;
+        }
+        vector<int> upperDiagonal(2*n -1, 0), sideRow(n,0), lowerDiagonal(2*n-1, 0);
+        solve(0, board, ans, upperDiagonal, sideRow, lowerDiagonal, n);
+        return ans;
+    }
+};
