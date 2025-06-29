@@ -1,0 +1,24 @@
+class Solution {
+  public:
+    vector<int> subsetSums(vector<int>& arr) {
+        vector<int>temp;
+        
+        int sum = 0;
+        
+        solve(0, temp, sum, arr);
+        return temp;
+    }
+    
+ public:
+    void solve(int index, vector<int>&temp, int sum, vector<int>&arr){
+
+        if(index == arr.size()){
+            temp.push_back(sum);
+            return;
+        }
+        
+        solve(index+1, temp, sum+arr[index], arr);
+        
+        solve(index+1, temp, sum, arr);
+    }
+};
