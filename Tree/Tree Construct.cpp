@@ -1,36 +1,34 @@
 #include<iostream>
 using namespace std;
 
-struct TreeNode {
-    int val;
-    TreeNode* left;;
-    TreeNode* right;
+struct Node{
+    int data;
+    Node* left;
+    Node* right;
     
-    
-    TreeNode(int data){
-        val = data;
-        left = nullptr;
-        right = nullptr;
+    Node(int val){
+        data = val;
+        left = right = nullptr;
     }
     
-    TreeNode(int data, TreeNode* leftchild, TreeNode* rightchild){
-        val = data;
-        left = leftchild;
-        right = rightchild;
+    Node(int val, Node* leftNode, Node* rightNode){
+        data = val;
+        left = leftNode;
+        right = rightNode;
     }
 };
 
 
 int main(){
-    struct TreeNode* leftchild = new TreeNode(6);
-    struct TreeNode* rightchild = new TreeNode(7);
+    struct Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
     
-    struct TreeNode*root = new TreeNode(5, leftchild, rightchild);
     
-    cout<< root->val<<endl;
+    root->left->right = new Node(5);
     
-    cout<<root->left->val<<" ";
-    cout<<root->right->val<<endl;
-    
-    return 0;
+    cout<< root->data <<endl;
+    cout<< root->left->data <<endl;
+    cout<< root->right->data <<endl;
+    cout<< root->left->right->data <<endl;
 }
